@@ -1,0 +1,53 @@
+data:
+  normal_cases_path: "demo_data/synthetic_normal_cases.csv"
+  abnormal_cases_path: "demo_data/synthetic_abnormal_cases.csv"
+  group_column: "group_doppler"
+
+columns:
+  gestational_age: "Gestational_Age"
+  maternal_age: "Maternal_Age"
+  ua_pi: "UA_PI"
+  ph: "pH"
+  pco2: "pCO2"
+  base_excess: "BE"
+
+groups:
+  normal: 0
+  abnormal: 1
+
+plausibility_ranges:
+  Gestational_Age: [20, 45]
+  Maternal_Age: [12, 55]
+  pH: [6.80, 7.60]
+  pCO2: [10, 90]
+  BE: [-30, 20]
+  UA_PI: [0.2, 3.0]
+
+endpoints:
+  acidemia_720:
+    ph_threshold: 7.20
+  acidemia_710:
+    ph_threshold: 7.10
+  acidemia_700:
+    ph_threshold: 7.00
+  met_acidosis_12:
+    ph_threshold: 7.00
+    base_deficit_threshold: 12
+  met_acidosis_16:
+    ph_threshold: 7.00
+    base_deficit_threshold: 16
+
+validation:
+  random_state: 42
+  holdout_size: 0.20
+  outer_folds: 5
+  inner_folds: 3
+
+risk_bands:
+  low: [0.0, 0.05]
+  moderate: [0.05, 0.20]
+  high: [0.20, 1.0]
+
+outputs:
+  tables_dir: "outputs/tables"
+  figures_dir: "outputs/figures"
